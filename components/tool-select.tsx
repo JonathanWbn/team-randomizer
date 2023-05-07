@@ -41,12 +41,11 @@ const ToolItem = ({
       ].join(" ")}
       onClick={onClick}
     >
-      {isSelected && (
-        <motion.div
-          className="absolute inset-0 -z-10 rounded-md bg-slate-200"
-          layoutId="selector"
-        />
-      )}
+      <motion.div
+        className="absolute inset-0 -z-10 rounded-md bg-slate-200"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isSelected ? 1 : 0 }}
+      />
       {upperCaseFirst(tool)}
     </div>
   );
