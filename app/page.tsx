@@ -50,7 +50,7 @@ export default function Home() {
       </div>
       <div className="mt-3 divide-y divide-dashed rounded-lg bg-white text-gray-900 drop-shadow-sm">
         <AnimatePresence>
-          {team.map((member, index) => (
+          {team.map((member) => (
             <motion.div
               key={member.id}
               className="group flex items-center gap-2 px-5 py-3"
