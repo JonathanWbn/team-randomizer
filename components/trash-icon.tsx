@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { useFocus, useHover } from "../utils";
 
 export const TrashIcon = ({ onClick }: { onClick: VoidFunction }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -55,39 +56,3 @@ export const TrashIcon = ({ onClick }: { onClick: VoidFunction }) => {
     </button>
   );
 };
-
-function useHover(ref: MutableRefObject<HTMLElement>) {
-  const [value, setValue] = useState(false);
-  const handleMouseOver = () => setValue(true);
-  const handleMouseOut = () => setValue(false);
-  useEffect(() => {
-    const node = ref.current;
-    if (node) {
-      node.addEventListener("mouseover", handleMouseOver);
-      node.addEventListener("mouseout", handleMouseOut);
-      return () => {
-        node.removeEventListener("mouseover", handleMouseOver);
-        node.removeEventListener("mouseout", handleMouseOut);
-      };
-    }
-  }, [ref]);
-  return value;
-}
-
-function useFocus(ref: MutableRefObject<HTMLElement>) {
-  const [value, setValue] = useState(false);
-  const handleFocus = () => setValue(true);
-  const handleBlur = () => setValue(false);
-  useEffect(() => {
-    const node = ref.current;
-    if (node) {
-      node.addEventListener("focus", handleFocus);
-      node.addEventListener("blur", handleBlur);
-      return () => {
-        node.removeEventListener("focus", handleFocus);
-        node.removeEventListener("blur", handleBlur);
-      };
-    }
-  }, [ref]);
-  return value;
-}

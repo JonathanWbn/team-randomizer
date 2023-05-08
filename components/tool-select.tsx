@@ -9,16 +9,16 @@ export const ToolSelect = ({
   onSelect: (tool: Tool) => void;
 }) => {
   return (
-    <div className="flex gap-2 rounded-lg border border-gray-200 p-1 text-sm text-gray-400">
+    <div className="flex gap-2 self-center rounded-lg border border-gray-200 p-1 text-sm text-gray-400">
       <ToolItem
-        tool="teams"
-        onClick={() => onSelect("teams")}
-        isSelected={tool === "teams"}
+        tool="group"
+        onClick={() => onSelect("group")}
+        isSelected={tool === "group"}
       />
       <ToolItem
-        tool="member"
-        onClick={() => onSelect("member")}
-        isSelected={tool === "member"}
+        tool="pick"
+        onClick={() => onSelect("pick")}
+        isSelected={tool === "pick"}
       />
     </div>
   );

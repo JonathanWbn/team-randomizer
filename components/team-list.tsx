@@ -12,8 +12,8 @@ export const TeamList = ({
   onDelete: (member: Member) => void;
 }) => {
   return (
-    <>
-      <div className="mt-3 divide-y divide-dashed rounded-lg bg-white text-gray-900 drop-shadow-sm">
+    <div>
+      <div className="divide-y divide-dashed rounded-lg bg-white text-gray-900 drop-shadow-sm">
         <AnimatePresence>
           {team.map((member) => (
             <motion.div
@@ -45,6 +45,6 @@ export const TeamList = ({
           {team.length} members
         </motion.div>
       )}
-    </>
+    </div>
   );
 };
