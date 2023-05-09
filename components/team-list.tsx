@@ -22,7 +22,7 @@ export const TeamList = ({
       >
         <input
           value={member.name}
-          className="grow tracking-wider placeholder:text-gray-300 focus:outline-none"
+          className="grow bg-transparent tracking-wider placeholder:text-gray-300 focus:outline-none"
           onChange={(e) => {
             onChange({ ...member, name: e.target.value });
           }}

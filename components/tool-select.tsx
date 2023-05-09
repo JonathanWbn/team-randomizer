@@ -9,7 +9,7 @@ export const ToolSelect = ({
   onSelect: (tool: Tool) => void;
 }) => {
   return (
-    <div className="flex gap-2 self-center rounded-lg border border-gray-200 p-1 text-sm text-gray-400">
+    <div className="flex gap-2 self-center rounded-lg border border-gray-300 p-1 text-sm text-gray-400">
       <ToolItem
         tool="group"
         onClick={() => onSelect("group")}

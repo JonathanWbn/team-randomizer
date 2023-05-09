@@ -10,7 +10,7 @@ export const TrashIcon = ({ onClick }: { onClick: VoidFunction }) => {
 
   return (
     <button
-      className="flex h-4 w-4 flex-col items-center rounded p-0 text-white outline-none transition focus:text-gray-600 group-hover:text-gray-600"
+      className="flex h-4 w-4 flex-col items-center rounded p-0 text-transparent outline-none transition focus:text-gray-600 group-hover:text-gray-600"
       onClick={onClick}
       ref={buttonRef}
     >

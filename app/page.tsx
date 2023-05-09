@@ -1,53 +1,75 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Input } from "../components/input";
 import { TeamList } from "../components/team-list";
 import { ToolSelect } from "../components/tool-select";
-import { GroupIcon } from "../components/group-icon";
-import { assignToGroup, splitInGroups } from "../utils";
+import { GroupButton } from "../components/group-button";
+import { assignToGroup, findRandomMember, splitInGroups } from "../utils";
 import { TeamCount } from "../components/team-count";
+import { SelectedMember } from "../components/selected-member";
+import { PickButton } from "../components/pick-button";
 
 export type Member = { id: string; name: string };
 export type Team = Member[];
 export type Tool = "group" | "pick";
 
 export default function Page() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [team, setTeam] = useState<Team>([]);
   const [tool, setTool] = useState<Tool>("group");
   const [groups, setGroups] = useState<Team[]>();
+  const [picked, setPicked] = useState<Member>();
 
   return (
     <div className="mx-auto mt-8 flex max-w-lg flex-col gap-4">
       <div className="flex justify-between">
-        <ToolSelect tool={tool} onSelect={setTool} />
-        <GroupIcon
-          disabled={team.length < 2}
-          onClick={() => setGroups(splitInGroups(team))}
-        />
-      </div>
-      <Input onSubmit={handleCreate} />
-      {groups ? (
-        groups.map((group, index) => (
-          <TeamList
-            key={index}
-            team={group}
-            onChange={handleChange}
-            onDelete={handleDelete}
+        <ToolSelect tool={tool} onSelect={handleSelect} />
+        {tool === "group" && (
+          <GroupButton
+            disabled={team.length < 2}
+            onClick={() => setGroups(splitInGroups(team))}
           />
-        ))
+        )}
+        {tool === "pick" && (
+          <PickButton
+            disabled={team.length < 1}
+            onClick={() => setPicked(findRandomMember(team, picked))}
+          />
+        )}
+      </div>
+      <Input onSubmit={handleCreate} ref={inputRef} />
+      {picked && <SelectedMember member={picked} />}
+      {groups ? (
+        <div className="flex flex-col gap-3">
+          {groups.map((group, index) => (
+            <TeamList
+              key={index}
+              team={group}
+              onChange={handleChange}
+              onDelete={handleDelete}
+            />
+          ))}
+        </div>
       ) : (
         <div>
           <TeamList
-            team={team}
+            team={team.filter((member) => !picked || member.id !== picked.id)}
             onChange={handleChange}
             onDelete={handleDelete}
           />
-          <TeamCount team={team} />
+          {!picked && <TeamCount team={team} />}
         </div>
       )}
     </div>
   );
+
+  function handleSelect(tool: Tool) {
+    setTool(tool);
+    setGroups(undefined);
+    setPicked(undefined);
+    inputRef.current?.focus();
+  }
 
   function handleChange(member: Member) {
     setTeam(team.map((m) => (m.id === member.id ? member : m)));
@@ -73,5 +95,6 @@ export default function Page() {
     if (groups) {
       setGroups(assignToGroup(groups, member));
     }
+    inputRef.current?.focus();
   }
 }

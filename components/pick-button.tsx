@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
-import { useHover } from "../utils";
+import { useFocus, useHover } from "../utils";
 
-export const GroupIcon = ({
+export const PickButton = ({
   disabled,
   onClick,
 }: {
@@ -22,10 +22,10 @@ export const GroupIcon = ({
       onClick={onClick}
     >
       <div className="absolute inset-0.5 rounded-md bg-white" />
-      <MemberIcon x={shouldAnimate ? -5 : 5} />
-      <MemberIcon x={shouldAnimate ? 36 : 16} />
-      <MemberIcon x={shouldAnimate ? 6 : 26} />
-      <MemberIcon x={shouldAnimate ? 47 : 37} />
+      <MemberIcon x={shouldAnimate ? 23 : 5} />
+      <MemberIcon x={shouldAnimate ? 35 : 16} />
+      <MemberIcon x={shouldAnimate ? -5 : 27} />
+      <MemberIcon x={shouldAnimate ? 47 : 38} />
     </motion.button>
   );
 };

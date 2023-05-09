@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import { forwardRef, useState } from "react";
 
-export const Input = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
+export const Input = forwardRef<
+  HTMLInputElement,
+  { onSubmit: (value: string) => void }
+>(function Input({ onSubmit }, inputRef) {
   const [input, setInput] = useState<string>("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit() {
     if (!input) return;
@@ -30,7 +32,6 @@ export const Input = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
         className="absolute inset-y-0 right-0 flex py-3 pr-3 hover:cursor-pointer"
         onClick={() => {
           handleSubmit();
-          inputRef.current?.focus();
         }}
       >
         <kbd className="inline-flex items-center rounded border border-gray-200 px-2 pt-1 font-sans text-xs text-gray-400">
@@ -39,4 +40,4 @@ export const Input = ({ onSubmit }: { onSubmit: (value: string) => void }) => {
       </div>
     </div>
   );
-};
+});

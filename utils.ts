@@ -1,6 +1,21 @@
 import { MutableRefObject, useEffect, useState } from "react";
 import { Member, Team } from "./app/page";
 
+export function findRandomMember(team: Team, currentPick?: Member) {
+  if (team.length === 1) {
+    return team[0];
+  }
+
+  const randomIndex = Math.floor(Math.random() * team.length);
+  const randomMember = team[randomIndex];
+
+  if (randomMember === currentPick) {
+    return findRandomMember(team, currentPick);
+  }
+
+  return randomMember;
+}
+
 export function splitInGroups(team: Team) {
   const shuffledTeam = [...team].sort(() => Math.random() - 0.5);
 
