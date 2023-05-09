@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useState } from "react";
-import { Team } from "./app/page";
+import { Member, Team } from "./app/page";
 
 export function splitInGroups(team: Team) {
   const shuffledTeam = [...team].sort(() => Math.random() - 0.5);
@@ -13,6 +13,16 @@ export function splitInGroups(team: Team) {
   ];
 
   return groups;
+}
+
+export function assignToGroup(groups: Team[], member: Member) {
+  const [group1, group2] = groups;
+
+  if (group1.length <= group2.length) {
+    return [group1.concat(member), group2];
+  } else {
+    return [group1, group2.concat(member)];
+  }
 }
 
 export function useHover(ref: MutableRefObject<HTMLElement>) {

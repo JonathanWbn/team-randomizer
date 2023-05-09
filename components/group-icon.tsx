@@ -2,7 +2,13 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useHover } from "../utils";
 
-export const GroupIcon = ({ disabled }: { disabled: boolean }) => {
+export const GroupIcon = ({
+  disabled,
+  onClick,
+}: {
+  disabled: boolean;
+  onClick: VoidFunction;
+}) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const isButtonHovered = useHover(buttonRef);
   const shouldAnimate = isButtonHovered;
@@ -13,6 +19,7 @@ export const GroupIcon = ({ disabled }: { disabled: boolean }) => {
       initial={{ opacity: disabled ? 0 : 1 }}
       animate={{ opacity: disabled ? 0 : 1 }}
       ref={buttonRef}
+      onClick={onClick}
     >
       <div className="absolute inset-0.5 rounded-md bg-white" />
       <MemberIcon x={shouldAnimate ? -5 : 5} />
