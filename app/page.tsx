@@ -13,52 +13,83 @@ import { PickButton } from "../components/pick-button";
 
 export type Member = { id: string; name: string };
 export type Team = Member[];
-export type Tool = "group" | "pick";
+export type Tool = "teams" | "pick";
 
 export default function Page() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [team, setTeam] = useState<Team>([]);
-  const [tool, setTool] = useState<Tool>("group");
+  const [tool, setTool] = useState<Tool>("teams");
   const [groups, setGroups] = useState<Team[]>();
   const [picked, setPicked] = useState<Member>();
 
   return (
-    <div className="mx-auto mt-8 flex max-w-lg flex-col gap-4">
-      <div className="flex justify-between">
-        <ToolSelect selected={tool} onSelect={handleSelect} />
-        {tool === "group" && <GroupButton onClick={handleGroupButton} />}
-        {tool === "pick" && <PickButton onClick={handlePickButton} />}
+    <div className="flex h-screen flex-col pt-24">
+      <div className="mx-auto flex w-screen max-w-lg grow flex-col gap-4 px-2">
+        <div className="flex justify-between">
+          <ToolSelect selected={tool} onSelect={handleSelect} />
+          {tool === "teams" && <GroupButton onClick={handleGroupButton} />}
+          {tool === "pick" && <PickButton onClick={handlePickButton} />}
+        </div>
+        <Input onSubmit={handleCreate} ref={inputRef} />
+        {picked && <SelectedMember member={picked} />}
+        {groups && (
+          <div className="flex flex-col gap-3">
+            <TeamList
+              team={groups[0]}
+              onChange={handleChange}
+              onDelete={handleDelete}
+            />
+            <motion.div
+              layoutId="group-divider"
+              className="-mx-4 h-px bg-gradient-to-br from-[#7928CA]/50 to-[#FF0081]/50 shadow shadow-[#982abe]"
+            />
+            <TeamList
+              team={groups[1]}
+              onChange={handleChange}
+              onDelete={handleDelete}
+            />
+          </div>
+        )}
+        {!groups && (
+          <div>
+            <TeamList
+              team={team.filter((member) => !picked || member.id !== picked.id)}
+              onChange={handleChange}
+              onDelete={handleDelete}
+            />
+            {!picked && <TeamCount team={team} />}
+          </div>
+        )}
       </div>
-      <Input onSubmit={handleCreate} ref={inputRef} />
-      {picked && <SelectedMember member={picked} />}
-      {groups && (
-        <div className="flex flex-col gap-3">
-          <TeamList
-            team={groups[0]}
-            onChange={handleChange}
-            onDelete={handleDelete}
-          />
-          <motion.div
-            layoutId="group-divider"
-            className="-mx-4 h-px bg-gradient-to-br from-[#7928CA]/50 to-[#FF0081]/50 shadow shadow-[#982abe]"
-          />
-          <TeamList
-            team={groups[1]}
-            onChange={handleChange}
-            onDelete={handleDelete}
-          />
+      <footer className="flex justify-between border-t bg-gray-50 px-4 py-3 text-xs text-gray-600">
+        <p className="leading-5">
+          &copy; {new Date().getFullYear()} teamgenerator.io | No rights
+          reserved, I&apos;ll do that later.
+        </p>
+        <div className="flex gap-2">
+          <a
+            href="https://jwieben.notion.site/Impressum-7be1b0e1a1384c1cb9362bd1aef963d1"
+            target="_blank"
+            className="hover:text-black"
+          >
+            imprint
+          </a>
+          <a
+            href="https://github.com/JonathanWbn/team-randomizer"
+            target="_blank"
+            className="hover:text-black"
+          >
+            source
+          </a>
+          <a
+            href="https://jonathanwieben.com/"
+            target="_blank"
+            className="hover:text-black"
+          >
+            author
+          </a>
         </div>
-      )}
-      {!groups && (
-        <div>
-          <TeamList
-            team={team.filter((member) => !picked || member.id !== picked.id)}
-            onChange={handleChange}
-            onDelete={handleDelete}
-          />
-          {!picked && <TeamCount team={team} />}
-        </div>
-      )}
+      </footer>
     </div>
   );
 

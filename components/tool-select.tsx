@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Tool } from "../app/page";
 
-const tools: Tool[] = ["group", "pick"];
+const tools: Tool[] = ["teams", "pick"];
 
 export const ToolSelect = ({
   selected,
