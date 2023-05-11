@@ -10,6 +10,7 @@ import { assignToGroup, findRandomMember, splitInGroups } from "../utils/team";
 import { TeamCount } from "../components/team-count";
 import { SelectedMember } from "../components/selected-member";
 import { PickButton } from "../components/pick-button";
+import useLocalStorageState from "use-local-storage-state";
 
 export type Member = { id: string; name: string };
 export type Team = Member[];
@@ -17,7 +18,9 @@ export type Tool = "teams" | "pick";
 
 export default function Page() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [team, setTeam] = useState<Team>([]);
+  const [team, setTeam] = useLocalStorageState<Team>("team", {
+    defaultValue: [],
+  });
   const [tool, setTool] = useState<Tool>("teams");
   const [groups, setGroups] = useState<Team[]>();
   const [picked, setPicked] = useState<Member>();
