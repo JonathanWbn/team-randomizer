@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 import { Input } from "../components/input";
 import { TeamList } from "../components/team-list";
@@ -24,34 +25,31 @@ export default function Page() {
   return (
     <div className="mx-auto mt-8 flex max-w-lg flex-col gap-4">
       <div className="flex justify-between">
-        <ToolSelect tool={tool} onSelect={handleSelect} />
-        {tool === "group" && (
-          <GroupButton
-            disabled={team.length < 2}
-            onClick={() => setGroups(splitInGroups(team))}
-          />
-        )}
-        {tool === "pick" && (
-          <PickButton
-            disabled={team.length < 1}
-            onClick={() => setPicked(findRandomMember(team, picked))}
-          />
-        )}
+        <ToolSelect selected={tool} onSelect={handleSelect} />
+        {tool === "group" && <GroupButton onClick={handleGroupButton} />}
+        {tool === "pick" && <PickButton onClick={handlePickButton} />}
       </div>
       <Input onSubmit={handleCreate} ref={inputRef} />
       {picked && <SelectedMember member={picked} />}
-      {groups ? (
+      {groups && (
         <div className="flex flex-col gap-3">
-          {groups.map((group, index) => (
-            <TeamList
-              key={index}
-              team={group}
-              onChange={handleChange}
-              onDelete={handleDelete}
-            />
-          ))}
+          <TeamList
+            team={groups[0]}
+            onChange={handleChange}
+            onDelete={handleDelete}
+          />
+          <motion.div
+            layoutId="group-divider"
+            className="-mx-4 h-px bg-gradient-to-br from-[#7928CA]/50 to-[#FF0081]/50 shadow shadow-[#982abe]"
+          />
+          <TeamList
+            team={groups[1]}
+            onChange={handleChange}
+            onDelete={handleDelete}
+          />
         </div>
-      ) : (
+      )}
+      {!groups && (
         <div>
           <TeamList
             team={team.filter((member) => !picked || member.id !== picked.id)}
@@ -71,6 +69,22 @@ export default function Page() {
     inputRef.current?.focus();
   }
 
+  function handleGroupButton() {
+    try {
+      setGroups(splitInGroups(team, groups));
+    } catch {
+      inputRef.current?.focus();
+    }
+  }
+
+  function handlePickButton() {
+    try {
+      setPicked(findRandomMember(team, picked));
+    } catch {
+      inputRef.current?.focus();
+    }
+  }
+
   function handleChange(member: Member) {
     setTeam(team.map((m) => (m.id === member.id ? member : m)));
     setGroups(
@@ -80,12 +94,13 @@ export default function Page() {
 
   function handleDelete(member: Member) {
     setTeam(team.filter((m) => m.id !== member.id));
-    const newGroups = groups?.map((g) => g.filter((m) => m.id !== member.id));
-
-    if (newGroups?.some((group) => group.length === 0)) {
+    const updatedGroups = groups?.map((g) =>
+      g.filter((m) => m.id !== member.id)
+    );
+    if (updatedGroups?.some((group) => group.length === 0)) {
       setGroups(undefined);
     } else {
-      setGroups(newGroups);
+      setGroups(updatedGroups);
     }
   }
 

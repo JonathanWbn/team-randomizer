@@ -1,7 +1,11 @@
 import { MutableRefObject, useEffect, useState } from "react";
 import { Member, Team } from "./app/page";
 
-export function findRandomMember(team: Team, currentPick?: Member) {
+export function findRandomMember(team: Team, previousPick?: Member): Member {
+  if (team.length === 0) {
+    throw new Error("Team is empty");
+  }
+
   if (team.length === 1) {
     return team[0];
   }
@@ -9,14 +13,18 @@ export function findRandomMember(team: Team, currentPick?: Member) {
   const randomIndex = Math.floor(Math.random() * team.length);
   const randomMember = team[randomIndex];
 
-  if (randomMember === currentPick) {
-    return findRandomMember(team, currentPick);
+  if (randomMember === previousPick) {
+    return findRandomMember(team, previousPick);
   }
 
   return randomMember;
 }
 
-export function splitInGroups(team: Team) {
+export function splitInGroups(team: Team, previousGroups?: Team[]) {
+  if (team.length < 2) {
+    throw new Error("Team is too small");
+  }
+
   const shuffledTeam = [...team].sort(() => Math.random() - 0.5);
 
   const round = Math.random() > 0.5 ? Math.ceil : Math.floor;
@@ -26,6 +34,10 @@ export function splitInGroups(team: Team) {
     shuffledTeam.slice(0, splitIndex),
     shuffledTeam.slice(splitIndex),
   ];
+
+  if (JSON.stringify(groups) === JSON.stringify(previousGroups)) {
+    return splitInGroups(team, previousGroups);
+  }
 
   return groups;
 }
