@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Teamgenerator",
+  title: "Team Generator",
   description: "Divide your team into grous or pick a member at random.",
   keywords: "team, generator, random, groups",
   authors: { name: "Jonathan Wieben", url: "https://jonathanwieben.com/" },
