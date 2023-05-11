@@ -66,7 +66,7 @@ export default function Page() {
           &copy; {new Date().getFullYear()} teamgenerator.io | No rights
           reserved, I&apos;ll do that later.
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <a
             href="https://jwieben.notion.site/Impressum-7be1b0e1a1384c1cb9362bd1aef963d1"
             target="_blank"
