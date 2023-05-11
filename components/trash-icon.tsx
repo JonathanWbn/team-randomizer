@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
 import { useRef } from "react";
-import { useFocus, useHover } from "../utils";
+import { motion } from "framer-motion";
+import { useFocus, useHover } from "../utils/hooks";
 
 export const TrashIcon = ({ onClick }: { onClick: VoidFunction }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);

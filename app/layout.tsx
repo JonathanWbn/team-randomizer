@@ -1,8 +1,10 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "randomize.team",
-  description: "Shuffle your team members for your next meeting",
+  title: "Teamgenerator",
+  description: "Divide your team into grous or pick a member at random.",
+  keywords: "team, generator, random, groups",
+  authors: { name: "Jonathan Wieben", url: "https://jonathanwieben.com/" },
 };
 
 export default function RootLayout({

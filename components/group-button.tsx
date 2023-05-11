@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useHover } from "../utils";
+import { useHover } from "../utils/hooks";
 import { MemberIcon } from "./member-icon";
 
 export const GroupButton = ({ onClick }: { onClick: VoidFunction }) => {

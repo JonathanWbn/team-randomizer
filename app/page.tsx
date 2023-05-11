@@ -6,7 +6,7 @@ import { Input } from "../components/input";
 import { TeamList } from "../components/team-list";
 import { ToolSelect } from "../components/tool-select";
 import { GroupButton } from "../components/group-button";
-import { assignToGroup, findRandomMember, splitInGroups } from "../utils";
+import { assignToGroup, findRandomMember, splitInGroups } from "../utils/team";
 import { TeamCount } from "../components/team-count";
 import { SelectedMember } from "../components/selected-member";
 import { PickButton } from "../components/pick-button";
