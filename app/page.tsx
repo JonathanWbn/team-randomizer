@@ -64,11 +64,7 @@ export default function Page() {
           </div>
         )}
       </div>
-      <footer className="flex justify-between border-t bg-gray-50 px-4 py-3 text-xs text-gray-600">
-        <p className="leading-5">
-          &copy; {new Date().getFullYear()} teamgenerator.io | No rights
-          reserved, I&apos;ll do that later.
-        </p>
+      <footer className="flex justify-end border-t bg-gray-50 px-4 py-3 text-xs text-gray-600">
         <div className="flex gap-3">
           <a
             href="https://jwieben.notion.site/Impressum-7be1b0e1a1384c1cb9362bd1aef963d1"
