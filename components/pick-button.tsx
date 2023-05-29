@@ -14,10 +14,10 @@ export const PickButton = ({ onClick }: { onClick: VoidFunction }) => {
       onClick={onClick}
     >
       <div className="absolute inset-0.5 rounded-md bg-white" />
-      <MemberIcon x={shouldAnimate ? 23 : 5} />
-      <MemberIcon x={shouldAnimate ? 35 : 16} />
-      <MemberIcon x={shouldAnimate ? -5 : 27} />
-      <MemberIcon x={shouldAnimate ? 47 : 38} />
+      <MemberIcon x={shouldAnimate ? 23 : -5} />
+      <MemberIcon x={shouldAnimate ? 35 : 23} />
+      <MemberIcon x={shouldAnimate ? -5 : 35} />
+      <MemberIcon x={shouldAnimate ? 47 : 47} />
     </button>
   );
 };

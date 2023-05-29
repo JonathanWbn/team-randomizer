@@ -14,10 +14,10 @@ export const GroupButton = ({ onClick }: { onClick: VoidFunction }) => {
       onClick={onClick}
     >
       <div className="absolute inset-0.5 rounded-md bg-white" />
-      <MemberIcon x={shouldAnimate ? -5 : 5} />
-      <MemberIcon x={shouldAnimate ? 36 : 16} />
-      <MemberIcon x={shouldAnimate ? 6 : 27} />
-      <MemberIcon x={shouldAnimate ? 47 : 38} />
+      <MemberIcon x={shouldAnimate ? 6 : -5} />
+      <MemberIcon x={shouldAnimate ? -5 : 36} />
+      <MemberIcon x={shouldAnimate ? 47 : 6} />
+      <MemberIcon x={shouldAnimate ? 36 : 47} />
     </button>
   );
 };
