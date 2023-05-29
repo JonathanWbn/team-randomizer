@@ -25,6 +25,7 @@ export const CopyButton = ({ groups }: { groups: Team[] }) => {
     <div className="flex items-center">
       <motion.div
         className="mr-2 text-sm font-light text-gray-500"
+        initial={{ opacity: 0 }}
         animate={{ opacity: hasJustCopied ? 1 : 0 }}
       >
         Copied!
