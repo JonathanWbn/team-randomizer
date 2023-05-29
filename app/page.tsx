@@ -11,6 +11,7 @@ import { TeamCount } from "../components/team-count";
 import { SelectedMember } from "../components/selected-member";
 import { PickButton } from "../components/pick-button";
 import useLocalStorageState from "use-local-storage-state";
+import { CopyButton } from "../components/copy-button";
 
 export type Member = { id: string; name: string };
 export type Team = Member[];
@@ -51,6 +52,9 @@ export default function Page() {
               onChange={handleChange}
               onDelete={handleDelete}
             />
+            <div className="self-end">
+              <CopyButton groups={groups} />
+            </div>
           </div>
         )}
         {!groups && (
