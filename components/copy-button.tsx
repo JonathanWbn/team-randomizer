@@ -39,7 +39,7 @@ export const CopyButton = ({ groups }: { groups: Team[] }) => {
             : "text-gray-400 hover:text-gray-600",
         ].join(" ")}
         onClick={() => {
-          copy(groupsAsText);
+          copy(groupsAsText, { format: "text/plain" });
           setHasJustCopied(true);
         }}
         animate={{ rotate: hasJustCopied ? -25 : isButtonHovered ? -15 : 0 }}
