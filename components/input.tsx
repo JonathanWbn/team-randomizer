@@ -18,6 +18,7 @@ export const Input = forwardRef<
         ref={inputRef}
         type="text"
         value={input}
+        tabIndex={1}
         onChange={(event) => setInput(event.target.value)}
         placeholder="Add team member"
         autoFocus

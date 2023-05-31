@@ -9,9 +9,10 @@ export const GroupButton = ({ onClick }: { onClick: VoidFunction }) => {
 
   return (
     <button
-      className="relative w-24 rounded-lg bg-gradient-to-br from-[#7928CA] to-[#FF0081] text-[#982abe] shadow shadow-[#982abe]/40 outline-none transition-all hover:shadow-md hover:shadow-[#982abe]/40"
+      className="relative w-24 rounded-lg bg-gradient-to-br from-[#7928CA] to-[#FF0081] text-[#982abe] shadow shadow-[#982abe]/40 outline-none transition-all hover:shadow-md hover:shadow-[#982abe]/40 focus:shadow-lg focus:shadow-[#982abe]/40"
       ref={buttonRef}
       onClick={onClick}
+      tabIndex={2}
     >
       <div className="absolute inset-0.5 rounded-md bg-white" />
       <MemberIcon x={shouldAnimate ? 6 : -5} />

@@ -9,9 +9,10 @@ export const PickButton = ({ onClick }: { onClick: VoidFunction }) => {
 
   return (
     <button
-      className="relative w-24 rounded-lg bg-gradient-to-br from-[#007CF0] to-[#00DFD8] text-[#0087b6] shadow shadow-[#0087b6]/40 transition-all hover:shadow-md hover:shadow-[#0087b6]/40"
+      className="relative w-24 rounded-lg bg-gradient-to-br from-[#007CF0] to-[#00DFD8] text-[#0087b6] shadow shadow-[#0087b6]/40 outline-none transition-all hover:shadow-md hover:shadow-[#0087b6]/40 focus:shadow-lg focus:shadow-[#0087b6]/40"
       ref={buttonRef}
       onClick={onClick}
+      tabIndex={2}
     >
       <div className="absolute inset-0.5 rounded-md bg-white" />
       <MemberIcon x={shouldAnimate ? 23 : -5} />
