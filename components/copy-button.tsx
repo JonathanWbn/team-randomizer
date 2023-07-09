@@ -36,7 +36,7 @@ export const CopyButton = ({ groups }: { groups: Team[] }) => {
           "cursor-pointer transition-colors",
           hasJustCopied
             ? "text-[#982abe]"
-            : "text-gray-400 hover:text-gray-600",
+            : "text-gray-700 hover:text-gray-900",
         ].join(" ")}
         onClick={() => {
           copy(groupsAsText, { format: "text/plain" });

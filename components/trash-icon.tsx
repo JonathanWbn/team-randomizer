@@ -15,8 +15,6 @@ export const TrashIcon = ({ onClick }: { onClick: VoidFunction }) => {
       ref={buttonRef}
     >
       <motion.svg
-        width="54"
-        height="12"
         viewBox="0 0 54 12"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -34,13 +32,7 @@ export const TrashIcon = ({ onClick }: { onClick: VoidFunction }) => {
           fill="currentColor"
         />
       </motion.svg>
-      <svg
-        width="46"
-        height="52"
-        viewBox="0 0 46 52"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg viewBox="0 0 46 52" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M39.3735 46.4144L43.9482 2.49731C43.9759 2.23141 43.7673 2 43.5 2L2.5 2C2.23266 2 2.0241 2.23141 2.0518 2.49731L6.6265 46.4144C6.83876 48.4521 8.55628 50 10.605 50L35.395 50C37.4437 50 39.1612 48.4521 39.3735 46.4144Z"
           fill="transparent"

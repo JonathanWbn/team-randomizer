@@ -41,6 +41,7 @@ export default function Page() {
             <TeamList
               team={groups[0]}
               onChange={handleChange}
+              onMoveUp={handleMoveUp}
               onDelete={handleDelete}
             />
             <motion.div
@@ -50,6 +51,7 @@ export default function Page() {
             <TeamList
               team={groups[1]}
               onChange={handleChange}
+              onMoveUp={handleMoveUp}
               onDelete={handleDelete}
             />
             <div className="self-end">
@@ -146,8 +148,24 @@ export default function Page() {
     }
     inputRef.current?.focus();
   }
+
+  function handleMoveUp(member: Member) {
+    if (!groups) return;
+    setGroups(groups.map((group) => moveUpMember(group, member)));
+  }
 }
 
 function createMember(name: string): Member {
   return { id: Math.random().toString(), name };
+}
+
+function moveUpMember(team: Team, member: Member) {
+  const index = team.findIndex((m) => m.id === member.id);
+  if (index <= 0) return team;
+  return [
+    ...team.slice(0, index - 1),
+    member,
+    team[index - 1],
+    ...team.slice(index + 1),
+  ];
 }
