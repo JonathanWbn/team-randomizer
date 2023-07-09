@@ -64,7 +64,7 @@ export default function Page() {
               onChange={handleChange}
               onDelete={handleDelete}
             />
-            {!picked && <TeamCount team={team} />}
+            {!picked && <TeamCount team={team} onDelete={() => setTeam([])} />}
           </div>
         )}
       </div>
