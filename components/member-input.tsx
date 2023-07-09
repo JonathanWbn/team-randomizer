@@ -1,14 +1,16 @@
 import { forwardRef, useState } from "react";
 
-export const Input = forwardRef<
+export const MemberInput = forwardRef<
   HTMLInputElement,
-  { onSubmit: (value: string) => void }
->(function Input({ onSubmit }, inputRef) {
+  { onSubmit: (members: string[]) => void }
+>(function MemberInput({ onSubmit }, inputRef) {
   const [input, setInput] = useState<string>("");
 
   function handleSubmit() {
     if (!input) return;
-    onSubmit(input);
+
+    const members = input.split(",").map((name) => name.trim());
+    onSubmit(members);
     setInput("");
   }
 

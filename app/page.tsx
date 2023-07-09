@@ -2,7 +2,6 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-import { Input } from "../components/input";
 import { TeamList } from "../components/team-list";
 import { ToolSelect } from "../components/tool-select";
 import { GroupButton } from "../components/group-button";
@@ -12,6 +11,7 @@ import { SelectedMember } from "../components/selected-member";
 import { PickButton } from "../components/pick-button";
 import useLocalStorageState from "use-local-storage-state";
 import { CopyButton } from "../components/copy-button";
+import { MemberInput } from "../components/member-input";
 
 export type Member = { id: string; name: string };
 export type Team = Member[];
@@ -34,7 +34,7 @@ export default function Page() {
           {tool === "teams" && <GroupButton onClick={handleGroupButton} />}
           {tool === "pick" && <PickButton onClick={handlePickButton} />}
         </div>
-        <Input onSubmit={handleCreate} ref={inputRef} />
+        <MemberInput onSubmit={handleCreate} ref={inputRef} />
         {picked && <SelectedMember member={picked} />}
         {groups && (
           <div className="flex flex-col gap-3">
@@ -138,12 +138,16 @@ export default function Page() {
     }
   }
 
-  function handleCreate(name: string) {
-    const member = { id: Math.random().toString(), name };
-    setTeam([member, ...team]);
+  function handleCreate(names: string[]) {
+    const members = names.map(createMember);
+    setTeam([...members, ...team]);
     if (groups) {
-      setGroups(assignToGroup(groups, member));
+      setGroups(members.reduce(assignToGroup, groups));
     }
     inputRef.current?.focus();
   }
+}
+
+function createMember(name: string): Member {
+  return { id: Math.random().toString(), name };
 }
